@@ -22,6 +22,7 @@ class DetectionModel:
         category_remapping: Optional[Dict] = None,
         load_at_init: bool = True,
         image_size: int = None,
+        retina_masks: bool = False
     ):
         """
         Init object detection/instance segmentation model.
@@ -44,6 +45,8 @@ class DetectionModel:
                 If True, automatically loads the model at initalization
             image_size: int
                 Inference input size.
+            retina_masks: bool
+                Improves YOLO segmentation.
         """
         self.model_path = model_path
         self.config_path = config_path
@@ -56,7 +59,7 @@ class DetectionModel:
         self.image_size = image_size
         self._original_predictions = None
         self._object_prediction_list_per_image = None
-
+        self.retina_masks=retina_masks
         self.set_device()
 
         # automatically load model if load_at_init is True
